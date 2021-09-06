@@ -19,7 +19,7 @@ import java.util.Set;
 public class BlogDto extends BaseDTO implements Serializable {
     private Long id;
 
-    private Set<Tag> tags;
+    private Set<TagDto> tags;
 
     private Sort sort;
 
