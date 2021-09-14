@@ -8,7 +8,7 @@ import lombok.Setter;
 public class TagDto {
     private Long id;
 
-    private String name;
+    private String tagName;
 
-    private String description;
+    private String content;
 }

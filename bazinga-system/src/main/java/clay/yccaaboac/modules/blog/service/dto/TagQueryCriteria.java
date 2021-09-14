@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Data
-public class BlogQueryCriteria implements Serializable {
+public class TagQueryCriteria implements Serializable {
     @Query(blurry = "title")
     private String title;
 

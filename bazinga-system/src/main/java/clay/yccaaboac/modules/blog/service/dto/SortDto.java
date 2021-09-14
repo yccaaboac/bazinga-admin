@@ -9,7 +9,7 @@ import lombok.Setter;
 public class SortDto {
     private Long id;
 
-    private String name;
+    private String sortName;
 
-    private String description;
+    private String content;
 }
