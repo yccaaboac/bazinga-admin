@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -57,7 +58,7 @@ public class UserController {
 
     @ApiOperation("查询用户")
     @GetMapping
-//    @PreAuthorize("@el.check('user:list')")
+    @PreAuthorize("@el.check('user:list')")
     public ResponseEntity<Object> query(UserQueryCriteria criteria, Pageable pageable){
         if (!ObjectUtils.isEmpty(criteria.getDeptId())) {
             criteria.getDeptIds().add(criteria.getDeptId());
