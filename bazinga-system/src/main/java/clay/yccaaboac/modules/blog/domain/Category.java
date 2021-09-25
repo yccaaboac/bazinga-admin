@@ -13,10 +13,10 @@ import java.io.Serializable;
 @Entity
 @Getter
 @Setter
-@Table(name = "blog_sort")
-public class Sort extends BaseEntity implements Serializable {
+@Table(name = "blog_category")
+public class Category extends BaseEntity implements Serializable {
     @Id
-    @Column(name="sort_id")
+    @Column(name="category_id")
     @ApiModelProperty(value = "ID",hidden = true)
     @NotNull(groups = Update.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +24,12 @@ public class Sort extends BaseEntity implements Serializable {
 
     @NotBlank
     @ApiModelProperty(value = "分类名称")
-    private String sortName;
+    private String name;
 
     @ApiModelProperty(value = "分类描述")
-    private String content;
+    private String description;
+
+    @NotNull
+    @ApiModelProperty(value = "是否启用")
+    private Boolean enabled;
 }

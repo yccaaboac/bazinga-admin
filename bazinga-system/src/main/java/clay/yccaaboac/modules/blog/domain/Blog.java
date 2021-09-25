@@ -1,7 +1,6 @@
 package clay.yccaaboac.modules.blog.domain;
 
 import clay.yccaaboac.base.BaseEntity;
-import com.alibaba.fastjson.annotation.JSONField;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,12 +35,15 @@ public class Blog extends BaseEntity implements Serializable {
     private Set<Tag> tags = new HashSet<>();
 
     @OneToOne
-    @JoinColumn(name = "sort_id")
+    @JoinColumn(name = "category_id")
     @ApiModelProperty(value = "分类")
-    private Sort sort;
+    private Category category;
 
     @ApiModelProperty(value = "标题")
     private String title;
+
+    @ApiModelProperty(value = "简介")
+    private String summary;
 
     @ApiModelProperty(value = "标题图")
     private String titlePicture;
@@ -49,11 +51,14 @@ public class Blog extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "作者")
     private String author;
 
+    @ApiModelProperty(value = "文章出处")
+    private String articleSource;
+
     @ApiModelProperty(value = "是否原创")
-    private Boolean isOriginal;
+    private String isOriginal;
 
     @ApiModelProperty(value = "发布状态")
-    private Boolean isPublish;
+    private String isPublish;
 
     @ApiModelProperty(value = "点击数")
     private Integer clickCount;

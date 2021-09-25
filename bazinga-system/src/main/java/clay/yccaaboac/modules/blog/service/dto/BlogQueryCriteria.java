@@ -12,8 +12,18 @@ public class BlogQueryCriteria implements Serializable {
     @Query(blurry = "title")
     private String title;
 
-//    @Query(type = Query.Type.EQUAL)
-//    private String tag;
+    @Query
+    private Boolean isPublish;
+
+    @Query
+    private Boolean isOriginal;
+
+    @Query(propName = "id", joinName = "category")
+    private Long categoryId;
+
+//    @Query(propName = "id", type = Query.Type.IN, joinName = "tags")
+//    private Set<Long> tagIds;
+
 
     @Query(type = Query.Type.BETWEEN)
     private List<Timestamp> createTime;

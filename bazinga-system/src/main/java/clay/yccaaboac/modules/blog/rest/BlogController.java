@@ -3,24 +3,17 @@ package clay.yccaaboac.modules.blog.rest;
 import clay.yccaaboac.modules.blog.domain.Blog;
 import clay.yccaaboac.modules.blog.service.BlogService;
 import clay.yccaaboac.modules.blog.service.dto.BlogQueryCriteria;
-import clay.yccaaboac.modules.system.service.dto.UserQueryCriteria;
-import clay.yccaaboac.utils.PageUtil;
-import clay.yccaaboac.utils.SecurityUtils;
-import cn.hutool.core.collection.CollectionUtil;
+import clay.yccaaboac.modules.system.domain.User;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * <p>Title:Blog</p>
@@ -42,5 +35,34 @@ public class BlogController {
 //    @PreAuthorize("@el.check('user:list')")
     public ResponseEntity<Object> query(BlogQueryCriteria criteria, Pageable pageable) {
         return new ResponseEntity<>(blogService.queryAll(criteria, pageable), HttpStatus.OK);
+    }
+
+    //@PreAuthorize("@el.check('user:add')")
+    @ApiOperation("新增博客")
+    @PostMapping
+    public ResponseEntity<Object> create(@Validated @RequestBody Blog resources) {
+        blogService.create(resources);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @ApiOperation("修改博客")
+    @PutMapping
+    public ResponseEntity<Object> update(@Validated(User.Update.class) @RequestBody Blog blog) throws Exception {
+        blogService.update(blog);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @ApiOperation("修改发布状态")
+    @PutMapping("/changeRelease")
+    public ResponseEntity<Object> changeRelease(Long id,String isPublish) throws Exception {
+        blogService.changeRelease(id,isPublish);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
+    @ApiOperation("删除博客")
+    @DeleteMapping
+    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids){
+        blogService.delete(ids);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

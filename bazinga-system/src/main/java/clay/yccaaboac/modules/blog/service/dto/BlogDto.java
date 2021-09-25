@@ -15,17 +15,21 @@ public class BlogDto extends BaseDTO implements Serializable {
 
     private Set<TagDto> tags;
 
-    private SortDto sort;
+    private CategoryDto category;
 
     private String title;
+
+    private String summary;
 
     private String titlePicture;
 
     private String author;
 
-    private Boolean isOriginal;
+    private String articleSource;
 
-    private Boolean isPublish;
+    private String isOriginal;
+
+    private String isPublish;
 
     private Integer clickCount;
 

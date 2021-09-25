@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Data
-public class SortQueryCriteria implements Serializable {
+public class CategoryQueryCriteria implements Serializable {
     @Query(blurry = "title")
     private String title;
 

@@ -1,7 +1,6 @@
 package clay.yccaaboac.modules.blog.domain;
 
 import clay.yccaaboac.base.BaseEntity;
-import clay.yccaaboac.modules.system.domain.Role;
 import com.alibaba.fastjson.annotation.JSONField;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -26,12 +25,11 @@ public class Tag extends BaseEntity implements Serializable {
     private Long id;
 
     @NotBlank
-    @Column(name = "tag_name")
     @ApiModelProperty(value = "标签名称")
-    private String tagName;
+    private String name;
 
     @ApiModelProperty(value = "标签描述")
-    private String content;
+    private String description;
 
     @JSONField(serialize = false)
     //如果只有两个@ManyToMany注释而没有mappedBy,则默认将具有两个实体表和两个连接表
