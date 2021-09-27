@@ -14,4 +14,6 @@ public class TagDto extends BaseDTO implements Serializable {
     private String name;
 
     private String description;
+
+    private Boolean enabled;
 }

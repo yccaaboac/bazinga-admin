@@ -9,11 +9,11 @@ import java.util.List;
 
 @Data
 public class CategoryQueryCriteria implements Serializable {
-    @Query(blurry = "title")
-    private String title;
+    @Query(blurry = "name,description")
+    private String blurry;
 
-//    @Query(type = Query.Type.EQUAL)
-//    private String tag;
+    @Query
+    private Boolean enabled;
 
     @Query(type = Query.Type.BETWEEN)
     private List<Timestamp> createTime;

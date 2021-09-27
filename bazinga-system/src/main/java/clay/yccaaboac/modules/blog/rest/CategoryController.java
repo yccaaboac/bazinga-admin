@@ -1,6 +1,7 @@
 package clay.yccaaboac.modules.blog.rest;
 
 
+import clay.yccaaboac.modules.blog.domain.Category;
 import clay.yccaaboac.modules.blog.service.CategoryService;
 import clay.yccaaboac.modules.blog.service.dto.CategoryDto;
 import clay.yccaaboac.modules.blog.service.dto.CategoryQueryCriteria;
@@ -11,11 +12,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Api(tags = "博客：类别管理")
@@ -39,4 +40,26 @@ public class CategoryController {
         List<CategoryDto> categoryDto = categoryService.queryAll();
         return new ResponseEntity<>(PageUtil.toPage(categoryDto, categoryDto.size()), HttpStatus.OK);
     }
+
+    @ApiOperation("新增类别")
+    @PostMapping
+    public ResponseEntity<Object> create(@Validated @RequestBody Category resources) {
+        categoryService.create(resources);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @ApiOperation("修改类别")
+    @PutMapping
+    public ResponseEntity<Object> update(@Validated(Category.Update.class) @RequestBody Category category) throws Exception {
+        categoryService.update(category);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @ApiOperation("删除类别")
+    @DeleteMapping
+    public ResponseEntity<Object> delete(@RequestBody Set<Long> ids){
+        categoryService.delete(ids);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

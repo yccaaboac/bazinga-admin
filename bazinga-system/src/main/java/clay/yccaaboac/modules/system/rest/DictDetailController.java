@@ -1,7 +1,8 @@
 package clay.yccaaboac.modules.system.rest;
 
+import clay.yccaaboac.exception.BadRequestException;
+import clay.yccaaboac.modules.system.domain.DictDetail;
 import clay.yccaaboac.modules.system.service.DictDetailService;
-import clay.yccaaboac.modules.system.service.dto.DictDetailDto;
 import clay.yccaaboac.modules.system.service.dto.DictDetailQueryCriteria;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,11 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -25,21 +23,36 @@ import java.util.Map;
 public class DictDetailController {
 
     private final DictDetailService dictDetailService;
-
-    @ApiOperation("根据字典名称查询多个字典详情")
-    @PostMapping(value = "/getListByDictTypeList")
-    public ResponseEntity<Object> getDictDetailMaps(@RequestBody List<String> dictNameList){
-        Map<String, List<DictDetailDto>> dictMap = new HashMap<>(16);
-        for (String name : dictNameList) {
-            dictMap.put(name, dictDetailService.getDictDetailByName(name));
-        }
-        return new ResponseEntity<>(dictMap, HttpStatus.OK);
-    }
+    private static final String ENTITY_NAME = "dictDetail";
 
     @ApiOperation("查询字典详情")
     @GetMapping
     public ResponseEntity<Object> query(DictDetailQueryCriteria criteria,
                                         @PageableDefault(sort = {"dictSort"}, direction = Sort.Direction.ASC) Pageable pageable){
         return new ResponseEntity<>(dictDetailService.queryAll(criteria,pageable),HttpStatus.OK);
+    }
+
+    @ApiOperation("新增字典详情")
+    @PostMapping
+    public ResponseEntity<Object> create(@Validated @RequestBody DictDetail resources){
+        if (resources.getId() != null) {
+            throw new BadRequestException("A new "+ ENTITY_NAME +" cannot already have an ID");
+        }
+        dictDetailService.create(resources);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @ApiOperation("修改字典详情")
+    @PutMapping
+    public ResponseEntity<Object> update(@Validated(DictDetail.Update.class) @RequestBody DictDetail resources){
+        dictDetailService.update(resources);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @ApiOperation("删除字典详情")
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id){
+        dictDetailService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

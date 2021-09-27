@@ -13,10 +13,10 @@ public class BlogQueryCriteria implements Serializable {
     private String title;
 
     @Query
-    private Boolean isPublish;
+    private String isPublish;
 
     @Query
-    private Boolean isOriginal;
+    private String isOriginal;
 
     @Query(propName = "id", joinName = "category")
     private Long categoryId;

@@ -44,7 +44,7 @@ public class BlogServiceImpl implements BlogService {
         Blog blog = blogRepository.findById(resources.getId()).orElseGet(Blog::new);
         ValidationUtil.isNull(blog.getId(), "Blog", "id", resources.getId());
         Blog blog1 = blogRepository.findByTitle(resources.getTitle());
-        if (blog1 != null && !blog.getId().equals(blog1.getId())) {
+        if (blog1 != null && !blog.getTitle().equals(blog1.getTitle())) {
             throw new EntityExistException(Blog.class, "title", resources.getTitle());
         }
         blog.setArticleSource(resources.getArticleSource());
