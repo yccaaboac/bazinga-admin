@@ -81,7 +81,6 @@ public class UserController {
         return new ResponseEntity<>(PageUtil.toPage(null,0),HttpStatus.OK);
     }
 
-//    @Log("新增用户")
     @ApiOperation("新增用户")
     @PostMapping
 //    @PreAuthorize("@el.check('user:add')")
@@ -93,9 +92,9 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-//    @Log("修改用户")
     @ApiOperation("修改用户")
     @PutMapping
+//    @Log("修改用户")
 //    @PreAuthorize("@el.check('user:edit')")
     public ResponseEntity<Object> update(@Validated(User.Update.class) @RequestBody User resources) throws Exception {
         checkLevel(resources);

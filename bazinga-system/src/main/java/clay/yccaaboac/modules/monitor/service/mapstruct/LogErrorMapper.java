@@ -13,15 +13,20 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package clay.yccaaboac.modules.system.service.mapstruct;
+package clay.yccaaboac.modules.monitor.service.mapstruct;
+
 
 import clay.yccaaboac.base.BaseMapper;
-import clay.yccaaboac.modules.system.domain.Role;
-import clay.yccaaboac.modules.system.service.dto.RoleDto;
+import clay.yccaaboac.modules.monitor.domain.Log;
+import clay.yccaaboac.modules.monitor.service.dto.LogErrorDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring", uses = {MenuMapper.class, DeptMapper.class}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface RoleMapper extends BaseMapper<RoleDto, Role> {
+/**
+ * @author Zheng Jie
+ * @date 2019-5-22
+ */
+@Mapper(componentModel = "spring",unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface LogErrorMapper extends BaseMapper<LogErrorDTO, Log> {
 
 }

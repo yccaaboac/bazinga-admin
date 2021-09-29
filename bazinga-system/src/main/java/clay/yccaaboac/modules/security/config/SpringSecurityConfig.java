@@ -6,7 +6,7 @@ import clay.yccaaboac.modules.security.security.JwtAccessDeniedHandler;
 import clay.yccaaboac.modules.security.security.JwtAuthenticationEntryPoint;
 import clay.yccaaboac.modules.security.security.TokenConfigurer;
 import clay.yccaaboac.modules.security.security.TokenProvider;
-import clay.yccaaboac.modules.security.service.OnlineUserService;
+import clay.yccaaboac.modules.monitor.service.impl.OnlineUserServiceImpl;
 import clay.yccaaboac.modules.security.service.UserCacheClean;
 import clay.yccaaboac.utils.enums.RequestMethodEnum;
 import lombok.RequiredArgsConstructor;
@@ -59,7 +59,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final ApplicationContext applicationContext;
     private final SecurityProperties properties;
-    private final OnlineUserService onlineUserService;
+    private final OnlineUserServiceImpl onlineUserService;
     private final UserCacheClean userCacheClean;
 
     @Bean

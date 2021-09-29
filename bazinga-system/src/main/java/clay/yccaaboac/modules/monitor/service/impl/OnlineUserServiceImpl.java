@@ -13,11 +13,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package clay.yccaaboac.modules.security.service;
+package clay.yccaaboac.modules.monitor.service.impl;
 
+import clay.yccaaboac.modules.monitor.service.dto.OnlineUserDto;
 import clay.yccaaboac.modules.security.config.bean.SecurityProperties;
 import clay.yccaaboac.modules.security.service.dto.JwtUserDto;
-import clay.yccaaboac.modules.security.service.dto.OnlineUserDto;
 import clay.yccaaboac.utils.EncryptUtils;
 import clay.yccaaboac.utils.PageUtil;
 import clay.yccaaboac.utils.RedisUtils;
@@ -36,12 +36,12 @@ import java.util.*;
  */
 @Service
 @Slf4j
-public class OnlineUserService {
+public class OnlineUserServiceImpl {
 
     private final SecurityProperties properties;
     private final RedisUtils redisUtils;
 
-    public OnlineUserService(SecurityProperties properties, RedisUtils redisUtils) {
+    public OnlineUserServiceImpl(SecurityProperties properties, RedisUtils redisUtils) {
         this.properties = properties;
         this.redisUtils = redisUtils;
     }

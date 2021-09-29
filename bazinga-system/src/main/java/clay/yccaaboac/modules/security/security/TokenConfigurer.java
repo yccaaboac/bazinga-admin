@@ -2,7 +2,7 @@
 package clay.yccaaboac.modules.security.security;
 
 import clay.yccaaboac.modules.security.config.bean.SecurityProperties;
-import clay.yccaaboac.modules.security.service.OnlineUserService;
+import clay.yccaaboac.modules.monitor.service.impl.OnlineUserServiceImpl;
 import clay.yccaaboac.modules.security.service.UserCacheClean;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -15,7 +15,7 @@ public class TokenConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFi
 
     private final TokenProvider tokenProvider;
     private final SecurityProperties properties;
-    private final OnlineUserService onlineUserService;
+    private final OnlineUserServiceImpl onlineUserService;
     private final UserCacheClean userCacheClean;
 
     @Override

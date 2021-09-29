@@ -10,7 +10,7 @@ import clay.yccaaboac.modules.security.config.bean.LoginCodeEnum;
 import clay.yccaaboac.modules.security.config.bean.LoginProperties;
 import clay.yccaaboac.modules.security.config.bean.SecurityProperties;
 import clay.yccaaboac.modules.security.security.TokenProvider;
-import clay.yccaaboac.modules.security.service.OnlineUserService;
+import clay.yccaaboac.modules.monitor.service.impl.OnlineUserServiceImpl;
 import clay.yccaaboac.modules.security.service.dto.AuthUserDto;
 import clay.yccaaboac.modules.security.service.dto.JwtUserDto;
 import clay.yccaaboac.utils.RedisUtils;
@@ -52,7 +52,7 @@ import java.util.concurrent.TimeUnit;
 public class AuthorizationController {
     private final SecurityProperties properties;
     private final RedisUtils redisUtils;
-    private final OnlineUserService onlineUserService;
+    private final OnlineUserServiceImpl onlineUserService;
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     @Resource

@@ -18,7 +18,7 @@ spring:
         ddl-auto: none
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: true
-    generate-ddl: true #自动生成数据库表
+
   redis:
     #数据库索引
     database: ${REDIS_DB:0}
@@ -28,7 +28,16 @@ spring:
     #连接超时时间
     timeout: 5000
 
-
+task:
+  pool:
+    # 核心线程池大小
+    core-pool-size: 10
+    # 最大线程数
+    max-pool-size: 30
+    # 活跃时间
+    keep-alive-seconds: 60
+    # 队列容量
+    queue-capacity: 50
 
 #邮箱验证码有效时间/秒
 code:

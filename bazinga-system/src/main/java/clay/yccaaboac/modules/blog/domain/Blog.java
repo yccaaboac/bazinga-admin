@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -27,12 +27,12 @@ public class Blog extends BaseEntity implements Serializable {
 
     //如果只有两个@ManyToMany注释而没有mappedBy,则默认将具有两个实体表和两个连接表
     //Blog为控制方,此时BlogDao.update(blog)/save(blog),中间表的数据添加地了
-    @ManyToMany()
+    @ManyToMany
     @ApiModelProperty(value = "标签")
     @JoinTable(name = "blog_blogs_tags",
             joinColumns = {@JoinColumn(name = "blog_id", referencedColumnName = "blog_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "tag_id")})
-    private Set<Tag> tags = new HashSet<>();
+    private Set<Tag> tags;
 
     @OneToOne
     @JoinColumn(name = "category_id")
@@ -66,4 +66,21 @@ public class Blog extends BaseEntity implements Serializable {
 //    @ApiModelProperty(value = "点赞数")
 //    private Integer likeCount;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Blog blog = (Blog) o;
+        return Objects.equals(id, blog.id) &&
+                Objects.equals(title, blog.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title);
+    }
 }

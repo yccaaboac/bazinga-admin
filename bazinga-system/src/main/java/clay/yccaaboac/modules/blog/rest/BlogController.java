@@ -3,7 +3,6 @@ package clay.yccaaboac.modules.blog.rest;
 import clay.yccaaboac.modules.blog.domain.Blog;
 import clay.yccaaboac.modules.blog.service.BlogService;
 import clay.yccaaboac.modules.blog.service.dto.BlogQueryCriteria;
-import clay.yccaaboac.modules.system.domain.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -47,8 +46,9 @@ public class BlogController {
 
     @ApiOperation("修改博客")
     @PutMapping
-    public ResponseEntity<Object> update(@Validated(User.Update.class) @RequestBody Blog blog) throws Exception {
-        blogService.update(blog);
+//    @Log("修改博客")
+    public ResponseEntity<Object> update(@Validated(Blog.Update.class) @RequestBody Blog resources) throws Exception {
+        blogService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @ApiOperation("修改发布状态")

@@ -1,6 +1,7 @@
 package clay.yccaaboac.modules.system.rest;
 
 import clay.yccaaboac.exception.BadRequestException;
+import clay.yccaaboac.modules.monitor.annotation.Log;
 import clay.yccaaboac.modules.system.domain.Dict;
 import clay.yccaaboac.modules.system.service.DictService;
 import clay.yccaaboac.modules.system.service.dto.DictQueryCriteria;
@@ -49,6 +50,7 @@ public class DictController {
 
     @ApiOperation("修改字典")
     @PutMapping
+    @Log("修改字典")
     public ResponseEntity<Object> update(@Validated(Dict.Update.class) @RequestBody Dict resources){
         dictService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

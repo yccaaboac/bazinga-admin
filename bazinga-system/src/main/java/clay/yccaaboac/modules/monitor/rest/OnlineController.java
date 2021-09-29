@@ -1,6 +1,6 @@
-package clay.yccaaboac.modules.security.rest;
+package clay.yccaaboac.modules.monitor.rest;
 
-import clay.yccaaboac.modules.security.service.OnlineUserService;
+import clay.yccaaboac.modules.monitor.service.impl.OnlineUserServiceImpl;
 import clay.yccaaboac.utils.EncryptUtils;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @RequestMapping("/auth/online")
 public class OnlineController {
-    private final OnlineUserService onlineUserService;
+    private final OnlineUserServiceImpl onlineUserService;
 
     @ApiOperation("查询在线用户")
     @GetMapping

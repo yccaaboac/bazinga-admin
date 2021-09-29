@@ -4,7 +4,7 @@ package clay.yccaaboac.modules.system.service.impl;
 import clay.yccaaboac.config.FileProperties;
 import clay.yccaaboac.exception.EntityExistException;
 import clay.yccaaboac.exception.EntityNotFoundException;
-import clay.yccaaboac.modules.security.service.OnlineUserService;
+import clay.yccaaboac.modules.monitor.service.impl.OnlineUserServiceImpl;
 import clay.yccaaboac.modules.security.service.UserCacheClean;
 import clay.yccaaboac.modules.system.domain.User;
 import clay.yccaaboac.modules.system.repository.UserRepository;
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
     private final FileProperties properties;
     private final RedisUtils redisUtils;
     private final UserCacheClean userCacheClean;
-    private final OnlineUserService onlineUserService;
+    private final OnlineUserServiceImpl onlineUserService;
 
     @Override
     public Object queryAll(UserQueryCriteria criteria, Pageable pageable) {

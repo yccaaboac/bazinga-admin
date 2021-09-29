@@ -25,7 +25,7 @@ public interface BlogService {
      * 编辑博客
      * @param resources
      */
-    void update(Blog resources);
+    void update(Blog resources) throws Exception;
 
     /**
      * 删除博客

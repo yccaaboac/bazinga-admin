@@ -1,9 +1,9 @@
 package clay.yccaaboac.modules.security.security;
 
 import clay.yccaaboac.modules.security.config.bean.SecurityProperties;
-import clay.yccaaboac.modules.security.service.OnlineUserService;
+import clay.yccaaboac.modules.monitor.service.impl.OnlineUserServiceImpl;
 import clay.yccaaboac.modules.security.service.UserCacheClean;
-import clay.yccaaboac.modules.security.service.dto.OnlineUserDto;
+import clay.yccaaboac.modules.monitor.service.dto.OnlineUserDto;
 import cn.hutool.core.util.StrUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class TokenFilter extends GenericFilterBean {
 
     private final TokenProvider tokenProvider;
     private final SecurityProperties properties;
-    private final OnlineUserService onlineUserService;
+    private final OnlineUserServiceImpl onlineUserService;
     private final UserCacheClean userCacheClean;
 
     /**
@@ -39,7 +39,7 @@ public class TokenFilter extends GenericFilterBean {
      * @param onlineUserService 用户在线
      * @param userCacheClean    用户缓存清理工具
      */
-    public TokenFilter(TokenProvider tokenProvider, SecurityProperties properties, OnlineUserService onlineUserService, UserCacheClean userCacheClean) {
+    public TokenFilter(TokenProvider tokenProvider, SecurityProperties properties, OnlineUserServiceImpl onlineUserService, UserCacheClean userCacheClean) {
         this.properties = properties;
         this.onlineUserService = onlineUserService;
         this.tokenProvider = tokenProvider;
