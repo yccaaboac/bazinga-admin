@@ -3,7 +3,6 @@ package clay.yccaaboac.modules.security.service;
 import clay.yccaaboac.exception.BadRequestException;
 import clay.yccaaboac.modules.security.config.bean.LoginProperties;
 import clay.yccaaboac.modules.security.service.dto.JwtUserDto;
-import clay.yccaaboac.modules.system.service.DataService;
 import clay.yccaaboac.modules.system.service.RoleService;
 import clay.yccaaboac.modules.system.service.UserService;
 import clay.yccaaboac.modules.system.service.dto.UserDto;
@@ -25,7 +24,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserService userService;
     private final RoleService roleService;
-    private final DataService dataService;
     private final LoginProperties loginProperties;
     public void setEnableCache(boolean enableCache) {
         this.loginProperties.setCacheEnable(enableCache);
@@ -64,7 +62,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 }
                 jwtUserDto = new JwtUserDto(
                         user,
-                        dataService.getDeptIds(user),
                         roleService.mapToGrantedAuthorities(user)
                 );
                 userDtoCache.put(username, jwtUserDto);

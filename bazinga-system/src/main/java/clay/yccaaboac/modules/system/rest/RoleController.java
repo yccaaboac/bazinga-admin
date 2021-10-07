@@ -1,17 +1,16 @@
 package clay.yccaaboac.modules.system.rest;
 
 import clay.yccaaboac.exception.BadRequestException;
+import clay.yccaaboac.modules.monitor.annotation.Log;
 import clay.yccaaboac.modules.system.domain.Role;
 import clay.yccaaboac.modules.system.service.RoleService;
 import clay.yccaaboac.modules.system.service.dto.RoleDto;
 import clay.yccaaboac.modules.system.service.dto.RoleQueryCriteria;
 import clay.yccaaboac.modules.system.service.dto.RoleSmallDto;
 import clay.yccaaboac.utils.SecurityUtils;
-import cn.hutool.core.lang.Dict;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,19 +33,7 @@ public class RoleController {
 
     private static final String ENTITY_NAME = "role";
 
-    @ApiOperation("获取单个role")
-    @GetMapping(value = "/{id}")
-    @PreAuthorize("@el.check('roles:list')")
-    public ResponseEntity<Object> query(@PathVariable Long id){
-        return new ResponseEntity<>(roleService.findById(id), HttpStatus.OK);
-    }
 
-//    @ApiOperation("导出角色数据")
-//    @GetMapping(value = "/download")
-//    @PreAuthorize("@el.check('role:list')")
-//    public void download(HttpServletResponse response, RoleQueryCriteria criteria) throws IOException {
-//        roleService.download(roleService.queryAll(criteria), response);
-//    }
 
     @ApiOperation("返回全部的角色")
     @GetMapping(value = "/all")
@@ -55,6 +42,7 @@ public class RoleController {
         return new ResponseEntity<>(roleService.queryAll(),HttpStatus.OK);
     }
 
+
     @ApiOperation("查询角色")
     @GetMapping
     @PreAuthorize("@el.check('roles:list')")
@@ -62,13 +50,20 @@ public class RoleController {
         return new ResponseEntity<>(roleService.queryAll(criteria,pageable),HttpStatus.OK);
     }
 
-    @ApiOperation("获取用户级别")
-    @GetMapping(value = "/level")
-    public ResponseEntity<Object> getLevel(){
-        return new ResponseEntity<>(Dict.create().set("level", getLevels(null)),HttpStatus.OK);
+    @ApiOperation("获取单个role")
+    @GetMapping(value = "/{id}")
+    @PreAuthorize("@el.check('roles:list')")
+    public ResponseEntity<Object> query(@PathVariable Long id){
+        return new ResponseEntity<>(roleService.findById(id), HttpStatus.OK);
     }
 
-//    @Log("新增角色")
+//    @ApiOperation("获取用户级别")
+//    @GetMapping(value = "/level")
+//    public ResponseEntity<Object> getLevel(){
+//        return new ResponseEntity<>(Dict.create().set("level", getLevels(null)),HttpStatus.OK);
+//    }
+
+    @Log("新增角色")
     @ApiOperation("新增角色")
     @PostMapping
     @PreAuthorize("@el.check('roles:add')")
@@ -81,7 +76,7 @@ public class RoleController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-//    @Log("修改角色")
+    @Log("修改角色")
     @ApiOperation("修改角色")
     @PutMapping
     @PreAuthorize("@el.check('roles:edit')")
@@ -92,17 +87,17 @@ public class RoleController {
     }
 
 //    @Log("修改角色菜单")
-    @ApiOperation("修改角色菜单")
-    @PutMapping(value = "/menu")
-    @PreAuthorize("@el.check('roles:edit')")
-    public ResponseEntity<Object> updateMenu(@RequestBody Role resources){
-        RoleDto role = roleService.findById(resources.getId());
-        getLevels(role.getLevel());
-        roleService.updateMenu(resources,role);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @ApiOperation("修改角色菜单")
+//    @PutMapping(value = "/menu")
+//    @PreAuthorize("@el.check('roles:edit')")
+//    public ResponseEntity<Object> updateMenu(@RequestBody Role resources){
+//        RoleDto role = roleService.findById(resources.getId());
+//        getLevels(role.getLevel());
+//        roleService.updateMenu(resources,role);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
-//    @Log("删除角色")
+    @Log("删除角色")
     @ApiOperation("删除角色")
     @DeleteMapping
     @PreAuthorize("@el.check('roles:del')")

@@ -5,6 +5,7 @@ import clay.yccaaboac.modules.monitor.repository.LogRepository;
 import clay.yccaaboac.modules.monitor.service.LogService;
 import clay.yccaaboac.modules.monitor.service.dto.LogQueryCriteria;
 import clay.yccaaboac.modules.monitor.service.mapstruct.LogErrorMapper;
+import clay.yccaaboac.modules.monitor.service.mapstruct.LogInfoMapper;
 import clay.yccaaboac.modules.monitor.service.mapstruct.LogSmallMapper;
 import clay.yccaaboac.utils.*;
 import cn.hutool.core.lang.Dict;
@@ -32,8 +33,8 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class LogServiceImpl implements LogService {
-    private static final Logger log = LoggerFactory.getLogger(LogServiceImpl.class);
     private final LogRepository logRepository;
+    private final LogInfoMapper logInfoMapper;
     private final LogErrorMapper logErrorMapper;
     private final LogSmallMapper logSmallMapper;
 
@@ -44,7 +45,7 @@ public class LogServiceImpl implements LogService {
         if (status.equals(criteria.getLogType())) {
             return PageUtil.toPage(page.map(logErrorMapper::toDto));
         }
-        return page;
+        return PageUtil.toPage(page.map(logInfoMapper::toDto));
     }
 
     @Override

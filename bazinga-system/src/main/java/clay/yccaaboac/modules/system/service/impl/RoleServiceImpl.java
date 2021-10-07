@@ -28,15 +28,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * @author Zheng Jie
- * @date 2018-12-03
- */
 @Service
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = "role")
@@ -56,18 +50,12 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<RoleDto> queryAll(RoleQueryCriteria criteria) {
-        return roleMapper.toDto(roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder)));
-    }
-
-    @Override
     public Object queryAll(RoleQueryCriteria criteria, Pageable pageable) {
         Page<Role> page = roleRepository.findAll((root, criteriaQuery, criteriaBuilder) -> QueryHelp.getPredicate(root, criteria, criteriaBuilder), pageable);
         return PageUtil.toPage(page.map(roleMapper::toDto));
     }
 
     @Override
-    @Cacheable(key = "'id:' + #p0")
     @Transactional(rollbackFor = Exception.class)
     public RoleDto findById(long id) {
         Role role = roleRepository.findById(id).orElseGet(Role::new);
@@ -98,22 +86,12 @@ public class RoleServiceImpl implements RoleService {
         role.setName(resources.getName());
         role.setDescription(resources.getDescription());
         role.setDataScope(resources.getDataScope());
-        role.setDepts(resources.getDepts());
         role.setLevel(resources.getLevel());
         roleRepository.save(role);
         // 更新相关缓存
         delCaches(role.getId(), null);
     }
 
-    @Override
-    public void updateMenu(Role resources, RoleDto roleDTO) {
-        Role role = roleMapper.toEntity(roleDTO);
-        List<User> users = userRepository.findByRoleId(role.getId());
-        // 更新菜单
-        role.setMenus(resources.getMenus());
-        delCaches(resources.getId(), users);
-        roleRepository.save(role);
-    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -167,19 +145,6 @@ public class RoleServiceImpl implements RoleService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public void download(List<RoleDto> roles, HttpServletResponse response) throws IOException {
-        List<Map<String, Object>> list = new ArrayList<>();
-        for (RoleDto role : roles) {
-            Map<String, Object> map = new LinkedHashMap<>();
-            map.put("角色名称", role.getName());
-            map.put("角色级别", role.getLevel());
-            map.put("描述", role.getDescription());
-            map.put("创建日期", role.getCreateTime());
-            list.add(map);
-        }
-        FileUtil.downloadExcel(list, response);
-    }
 
     @Override
     public void verification(Set<Long> ids) {

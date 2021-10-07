@@ -25,11 +25,6 @@ public class DictController {
     private final DictService dictService;
     private static final String ENTITY_NAME = "dict";
 
-//    @ApiOperation("查询字典")
-//    @GetMapping(value = "/all")
-//    public ResponseEntity<Object> queryAll(){
-//        return new ResponseEntity<>(dictService.queryAll(new DictQueryCriteria()), HttpStatus.OK);
-//    }
 
     @ApiOperation("查询字典")
     @GetMapping
@@ -37,6 +32,7 @@ public class DictController {
         return new ResponseEntity<>(dictService.queryAll(resources,pageable),HttpStatus.OK);
     }
 
+    @Log("新增字典")
     @ApiOperation("新增字典")
     @PostMapping
     public ResponseEntity<Object> create(@Validated @RequestBody Dict resources){
@@ -48,14 +44,15 @@ public class DictController {
     }
 
 
+    @Log("修改字典")
     @ApiOperation("修改字典")
     @PutMapping
-    @Log("修改字典")
     public ResponseEntity<Object> update(@Validated(Dict.Update.class) @RequestBody Dict resources){
         dictService.update(resources);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @Log("删除字典")
     @ApiOperation("删除字典")
     @DeleteMapping
     public ResponseEntity<Object> delete(@RequestBody Set<Long> ids){

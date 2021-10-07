@@ -1,6 +1,7 @@
 package clay.yccaaboac.modules.system.rest;
 
 import clay.yccaaboac.exception.BadRequestException;
+import clay.yccaaboac.modules.monitor.annotation.Log;
 import clay.yccaaboac.modules.system.domain.DictDetail;
 import clay.yccaaboac.modules.system.service.DictDetailService;
 import clay.yccaaboac.modules.system.service.dto.DictDetailQueryCriteria;
@@ -32,6 +33,7 @@ public class DictDetailController {
         return new ResponseEntity<>(dictDetailService.queryAll(criteria,pageable),HttpStatus.OK);
     }
 
+    @Log("新增字典详情")
     @ApiOperation("新增字典详情")
     @PostMapping
     public ResponseEntity<Object> create(@Validated @RequestBody DictDetail resources){
@@ -42,6 +44,7 @@ public class DictDetailController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @Log("修改字典详情")
     @ApiOperation("修改字典详情")
     @PutMapping
     public ResponseEntity<Object> update(@Validated(DictDetail.Update.class) @RequestBody DictDetail resources){
@@ -49,6 +52,7 @@ public class DictDetailController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @Log("删除字典详情")
     @ApiOperation("删除字典详情")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id){

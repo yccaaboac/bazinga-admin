@@ -20,20 +20,14 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * @author Zheng Jie
- */
 @Service
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = "menu")
@@ -68,7 +62,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    @Cacheable(key = "'id:' + #p0")
+//    @Cacheable(key = "'id:' + #p0")
     public MenuDto findById(long id) {
         Menu menu = menuRepository.findById(id).orElseGet(Menu::new);
         ValidationUtil.isNull(menu.getId(),"Menu","id",id);
@@ -81,7 +75,7 @@ public class MenuServiceImpl implements MenuService {
      * @return /
      */
     @Override
-    @Cacheable(key = "'user:' + #p0")
+//    @Cacheable(key = "'user:' + #p0")
     public List<MenuDto> findByUser(Long currentUserId) {
         List<RoleSmallDto> roles = roleService.findByUsersId(currentUserId);
         Set<Long> roleIds = roles.stream().map(RoleSmallDto::getId).collect(Collectors.toSet());
@@ -300,22 +294,6 @@ public class MenuServiceImpl implements MenuService {
         return menu;
     }
 
-    @Override
-    public void download(List<MenuDto> menuDtos, HttpServletResponse response) throws IOException {
-        List<Map<String, Object>> list = new ArrayList<>();
-        for (MenuDto menuDTO : menuDtos) {
-            Map<String,Object> map = new LinkedHashMap<>();
-            map.put("菜单标题", menuDTO.getTitle());
-            map.put("菜单类型", menuDTO.getType() == null ? "目录" : menuDTO.getType() == 1 ? "菜单" : "按钮");
-            map.put("权限标识", menuDTO.getPermission());
-            map.put("外链菜单", menuDTO.getIFrame() ? "是" : "否");
-            map.put("菜单可见", menuDTO.getHidden() ? "否" : "是");
-            map.put("是否缓存", menuDTO.getCache() ? "是" : "否");
-            map.put("创建日期", menuDTO.getCreateTime());
-            list.add(map);
-        }
-        FileUtil.downloadExcel(list, response);
-    }
 
     private void updateSubCnt(Long menuId){
         if(menuId != null){

@@ -19,8 +19,6 @@ import clay.yccaaboac.modules.system.domain.Menu;
 import clay.yccaaboac.modules.system.service.dto.MenuDto;
 import clay.yccaaboac.modules.system.service.dto.MenuQueryCriteria;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -66,6 +64,7 @@ public interface MenuService {
      */
     Set<Menu> getChildMenus(List<Menu> menuList, Set<Menu> menuSet);
 
+
     /**
      * 构建菜单树
      * @param menuDtos 原始数据
@@ -92,14 +91,6 @@ public interface MenuService {
      * @param menuSet /
      */
     void delete(Set<Menu> menuSet);
-
-    /**
-     * 导出
-     * @param queryAll 待导出的数据
-     * @param response /
-     * @throws IOException /
-     */
-    void download(List<MenuDto> queryAll, HttpServletResponse response) throws IOException;
 
     /**
      * 懒加载菜单数据

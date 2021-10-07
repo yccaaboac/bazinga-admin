@@ -23,8 +23,6 @@ import clay.yccaaboac.modules.system.service.dto.UserDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -79,12 +77,7 @@ public interface RoleService {
      */
     Integer findByRoles(Set<Role> roles);
 
-    /**
-     * 修改绑定的菜单
-     * @param resources /
-     * @param roleDTO /
-     */
-    void updateMenu(Role resources, RoleDto roleDTO);
+
 
     /**
      * 解绑菜单
@@ -100,20 +93,7 @@ public interface RoleService {
      */
     Object queryAll(RoleQueryCriteria criteria, Pageable pageable);
 
-    /**
-     * 查询全部
-     * @param criteria 条件
-     * @return /
-     */
-    List<RoleDto> queryAll(RoleQueryCriteria criteria);
 
-    /**
-     * 导出数据
-     * @param queryAll 待导出的数据
-     * @param response /
-     * @throws IOException /
-     */
-    void download(List<RoleDto> queryAll, HttpServletResponse response) throws IOException;
 
     /**
      * 获取用户权限信息
