@@ -59,7 +59,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final ApplicationContext applicationContext;
     private final SecurityProperties properties;
-    private final OnlineUserServiceImpl onlineUserService;
+    private final OnlineUserServiceImpl onlineUserServiceImpl;
     private final UserCacheClean userCacheClean;
 
     @Bean
@@ -141,7 +141,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private TokenConfigurer securityConfigurerAdapter() {
-        return new TokenConfigurer(tokenProvider, properties, onlineUserService, userCacheClean);
+        return new TokenConfigurer(tokenProvider, properties, onlineUserServiceImpl, userCacheClean);
     }
 
 

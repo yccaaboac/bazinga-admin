@@ -15,12 +15,12 @@ public class TokenConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFi
 
     private final TokenProvider tokenProvider;
     private final SecurityProperties properties;
-    private final OnlineUserServiceImpl onlineUserService;
+    private final OnlineUserServiceImpl onlineUserServiceImpl;
     private final UserCacheClean userCacheClean;
 
     @Override
     public void configure(HttpSecurity http) {
-        TokenFilter customFilter = new TokenFilter(tokenProvider, properties, onlineUserService, userCacheClean);
+        TokenFilter customFilter = new TokenFilter(tokenProvider, properties, onlineUserServiceImpl, userCacheClean);
         http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

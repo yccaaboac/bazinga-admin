@@ -30,18 +30,18 @@ public class TokenFilter extends GenericFilterBean {
 
     private final TokenProvider tokenProvider;
     private final SecurityProperties properties;
-    private final OnlineUserServiceImpl onlineUserService;
+    private final OnlineUserServiceImpl onlineUserServiceImpl;
     private final UserCacheClean userCacheClean;
 
     /**
      * @param tokenProvider     Token
      * @param properties        JWT
-     * @param onlineUserService 用户在线
+     * @param onlineUserServiceImpl 用户在线
      * @param userCacheClean    用户缓存清理工具
      */
-    public TokenFilter(TokenProvider tokenProvider, SecurityProperties properties, OnlineUserServiceImpl onlineUserService, UserCacheClean userCacheClean) {
+    public TokenFilter(TokenProvider tokenProvider, SecurityProperties properties, OnlineUserServiceImpl onlineUserServiceImpl, UserCacheClean userCacheClean) {
         this.properties = properties;
-        this.onlineUserService = onlineUserService;
+        this.onlineUserServiceImpl = onlineUserServiceImpl;
         this.tokenProvider = tokenProvider;
         this.userCacheClean = userCacheClean;
     }
@@ -56,7 +56,7 @@ public class TokenFilter extends GenericFilterBean {
             OnlineUserDto onlineUserDto = null;
             boolean cleanUserCache = false;
             try {
-                onlineUserDto = onlineUserService.getOne(properties.getOnlineKey() + token);
+                onlineUserDto = onlineUserServiceImpl.getOne(properties.getOnlineKey() + token);
             } catch (ExpiredJwtException e) {
                 log.error(e.getMessage());
                 cleanUserCache = true;

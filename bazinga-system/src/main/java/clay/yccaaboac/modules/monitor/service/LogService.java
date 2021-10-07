@@ -25,10 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * @author Zheng Jie
- * @date 2018-11-24
- */
 public interface LogService {
 
     /**

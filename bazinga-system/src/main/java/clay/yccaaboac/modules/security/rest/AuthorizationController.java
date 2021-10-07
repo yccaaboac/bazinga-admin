@@ -52,7 +52,7 @@ import java.util.concurrent.TimeUnit;
 public class AuthorizationController {
     private final SecurityProperties properties;
     private final RedisUtils redisUtils;
-    private final OnlineUserServiceImpl onlineUserService;
+    private final OnlineUserServiceImpl onlineUserServiceImpl;
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     @Resource
@@ -81,7 +81,7 @@ public class AuthorizationController {
         String token = tokenProvider.createToken(authentication);
         final JwtUserDto jwtUserDto = (JwtUserDto) authentication.getPrincipal();
         // 保存在线信息
-        onlineUserService.save(jwtUserDto, token, request);
+        onlineUserServiceImpl.save(jwtUserDto, token, request);
         // 返回 token 与 用户信息
         Map<String, Object> authInfo = new HashMap<String, Object>(2) {{
             put("token", properties.getTokenStartWith() + token);
@@ -89,7 +89,7 @@ public class AuthorizationController {
         }};
         if (loginProperties.isSingleLogin()) {
             //踢掉之前已经登录的token
-            onlineUserService.checkLoginOnUser(authUser.getUsername(), token);
+            onlineUserServiceImpl.checkLoginOnUser(authUser.getUsername(), token);
         }
         return ResponseEntity.ok(authInfo);
     }
@@ -124,7 +124,7 @@ public class AuthorizationController {
     @ApiOperation("退出登录")
     @AnonymousDeleteMapping(value = "/logout")
     public ResponseEntity<Object> logout(HttpServletRequest request) {
-        onlineUserService.logout(tokenProvider.getToken(request));
+        onlineUserServiceImpl.logout(tokenProvider.getToken(request));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
