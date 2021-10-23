@@ -86,16 +86,16 @@ public class RoleController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-//    @Log("修改角色菜单")
-//    @ApiOperation("修改角色菜单")
-//    @PutMapping(value = "/menu")
-//    @PreAuthorize("@el.check('roles:edit')")
-//    public ResponseEntity<Object> updateMenu(@RequestBody Role resources){
-//        RoleDto role = roleService.findById(resources.getId());
-//        getLevels(role.getLevel());
-//        roleService.updateMenu(resources,role);
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//    }
+    @Log("修改角色菜单")
+    @ApiOperation("修改角色菜单")
+    @PutMapping(value = "/menu")
+    @PreAuthorize("@el.check('roles:edit')")
+    public ResponseEntity<Object> updateMenu(@RequestBody Role resources){
+        RoleDto role = roleService.findById(resources.getId());
+        getLevels(role.getLevel());
+        roleService.updateMenu(resources,role);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
     @Log("删除角色")
     @ApiOperation("删除角色")

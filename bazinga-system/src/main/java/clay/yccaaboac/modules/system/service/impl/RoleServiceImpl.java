@@ -101,6 +101,17 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public void updateMenu(Role resources, RoleDto roleDTO) {
+        Role role = roleMapper.toEntity(roleDTO);
+        List<User> users = userRepository.findByRoleId(role.getId());
+        // 更新菜单
+        role.setMenus(resources.getMenus());
+        delCaches(resources.getId(), users);
+        roleRepository.save(role);
+    }
+
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void delete(Set<Long> ids) {
         for (Long id : ids) {

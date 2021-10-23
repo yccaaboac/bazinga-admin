@@ -16,6 +16,13 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
         // 当用户尝试访问安全的REST资源而不提供任何凭据时，将调用此方法发送401 响应
+        /*{
+            "timestamp": "2021-10-23 02:26:35",
+                "status": 401,
+                "error": "Unauthorized",
+                "message": "Full authentication is required to access this resource",
+                "path": "/api/picCategories"
+        }*/
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException==null?"Unauthorized":authException.getMessage());
     }
 }

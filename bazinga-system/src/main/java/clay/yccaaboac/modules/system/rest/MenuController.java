@@ -22,6 +22,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -50,17 +51,17 @@ public class MenuController {
         return new ResponseEntity<>(menuService.getMenus(pid),HttpStatus.OK);
     }
 
-//    @ApiOperation("根据菜单ID返回所有子节点ID，包含自身ID")
-//    @GetMapping(value = "/child")
-////    @PreAuthorize("@el.check('menu:list','roles:list')")
-//    public ResponseEntity<Object> child(@RequestParam Long id){
-//        Set<Menu> menuSet = new HashSet<>();
-//        List<MenuDto> menuList = menuService.getMenus(id);
-//        menuSet.add(menuService.findOne(id));
-//        menuSet = menuService.getChildMenus(menuMapper.toEntity(menuList), menuSet);
-//        Set<Long> ids = menuSet.stream().map(Menu::getId).collect(Collectors.toSet());
-//        return new ResponseEntity<>(ids,HttpStatus.OK);
-//    }
+    @ApiOperation("根据菜单ID返回所有子节点ID，包含自身ID")
+    @GetMapping(value = "/child")
+    @PreAuthorize("@el.check('menu:list','roles:list')")
+    public ResponseEntity<Object> child(@RequestParam Long id){
+        Set<Menu> menuSet = new HashSet<>();
+        List<MenuDto> menuList = menuService.getMenus(id);
+        menuSet.add(menuService.findOne(id));
+        menuSet = menuService.getChildMenus(menuMapper.toEntity(menuList), menuSet);
+        Set<Long> ids = menuSet.stream().map(Menu::getId).collect(Collectors.toSet());
+        return new ResponseEntity<>(ids,HttpStatus.OK);
+    }
 
     @GetMapping
     @ApiOperation("查询菜单")

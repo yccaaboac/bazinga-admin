@@ -1,10 +1,12 @@
 package clay.yccaaboac.modules.monitor.service.dto;
 
 import lombok.Data;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Data
-public class LogInfoDto {
+public class LogErrorDto implements Serializable {
 
     private Long id;
 
@@ -23,10 +25,4 @@ public class LogInfoDto {
     private String address;
 
     private Timestamp createTime;
-
-    private Long time;
-
-    private String logType;
-
-    private byte[] exceptionDetail;
 }

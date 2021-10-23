@@ -77,7 +77,12 @@ public interface RoleService {
      */
     Integer findByRoles(Set<Role> roles);
 
-
+    /**
+     * 修改绑定的菜单
+     * @param resources /
+     * @param roleDTO /
+     */
+    void updateMenu(Role resources, RoleDto roleDTO);
 
     /**
      * 解绑菜单
