@@ -5,7 +5,7 @@ import clay.yccaaboac.modules.blog.domain.Tag;
 import clay.yccaaboac.modules.blog.service.TagService;
 import clay.yccaaboac.modules.blog.service.dto.TagDto;
 import clay.yccaaboac.modules.blog.service.dto.TagQueryCriteria;
-import clay.yccaaboac.modules.monitor.annotation.Log;
+import clay.yccaaboac.annotation.Log;
 import clay.yccaaboac.utils.PageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

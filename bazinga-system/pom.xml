@@ -18,6 +18,12 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>clay.yccaaboac</groupId>
+            <artifactId>bazinga-logging</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>clay.yccaaboac</groupId>
             <artifactId>bazinga-common</artifactId>

@@ -33,4 +33,12 @@ public class BlogDto extends BaseDTO implements Serializable {
 
     private Integer clickCount;
 
+    private Integer commentCount;
+
+    private String openComment;
+
+    public Boolean getHasChildren() {//在评论系统中用到
+        return openComment.equals("1");
+    }
+
 }

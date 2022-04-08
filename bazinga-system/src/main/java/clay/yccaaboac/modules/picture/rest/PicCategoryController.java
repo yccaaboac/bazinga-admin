@@ -1,7 +1,7 @@
 package clay.yccaaboac.modules.picture.rest;
 
+import clay.yccaaboac.annotation.Log;
 import clay.yccaaboac.modules.blog.domain.Category;
-import clay.yccaaboac.modules.monitor.annotation.Log;
 import clay.yccaaboac.modules.picture.domain.PicCategory;
 import clay.yccaaboac.modules.picture.service.PicCategoryService;
 import clay.yccaaboac.modules.picture.service.dto.PicCategoryDto;

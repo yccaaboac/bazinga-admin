@@ -27,4 +27,7 @@ public class BlogQueryCriteria implements Serializable {
 
     @Query(type = Query.Type.BETWEEN)
     private List<Timestamp> createTime;
+
+    @Query
+    private String openComment;
 }

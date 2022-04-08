@@ -3,7 +3,7 @@ package clay.yccaaboac.modules.blog.rest;
 import clay.yccaaboac.modules.blog.domain.Blog;
 import clay.yccaaboac.modules.blog.service.BlogService;
 import clay.yccaaboac.modules.blog.service.dto.BlogQueryCriteria;
-import clay.yccaaboac.modules.monitor.annotation.Log;
+import clay.yccaaboac.annotation.Log;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,8 @@ public class BlogController {
     @GetMapping
     @PreAuthorize("@el.check('blog:list')")
     public ResponseEntity<Object> query(BlogQueryCriteria criteria, Pageable pageable) {
-        return new ResponseEntity<>(blogService.queryAll(criteria, pageable), HttpStatus.OK);
+        ResponseEntity<Object> objectResponseEntity = new ResponseEntity<>(blogService.queryAll(criteria, pageable), HttpStatus.OK);
+        return objectResponseEntity;
     }
 
 
@@ -74,4 +75,5 @@ public class BlogController {
         blogService.delete(ids);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

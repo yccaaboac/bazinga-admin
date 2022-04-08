@@ -20,7 +20,7 @@ public class Picture extends BaseEntity implements Serializable {
     @NotNull(groups = Update.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "ID", hidden = true)
-    private String id;
+    private Long id;
 
     @ApiModelProperty(value = "图片名称")
     private String name;

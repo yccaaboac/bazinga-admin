@@ -45,7 +45,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             jwtUserDto = userDtoCache.get(username);
             searchDb = false;
         }
-        //不用每次都去数据库查找用户，只要登录过（不管成功与否），如果用户名存在，就会被缓存起来
+        //不用每次都去数据库查找用户
         if (searchDb) {
             UserDto user;
             try {

@@ -63,8 +63,13 @@ public class Blog extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "点击数")
     private Integer clickCount;
 
+    @ApiModelProperty(value = "评论数")
+    private Integer commentCount;
+
 //    @ApiModelProperty(value = "点赞数")
 //    private Integer likeCount;
+    @ApiModelProperty(value = "是否开启评论")
+    private String openComment;
 
     @Override
     public boolean equals(Object o) {

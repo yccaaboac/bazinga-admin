@@ -1,8 +1,8 @@
 package clay.yccaaboac.modules.system.rest;
 
 
+import clay.yccaaboac.annotation.Log;
 import clay.yccaaboac.exception.BadRequestException;
-import clay.yccaaboac.modules.monitor.annotation.Log;
 import clay.yccaaboac.modules.system.domain.User;
 import clay.yccaaboac.modules.system.service.RoleService;
 import clay.yccaaboac.modules.system.service.UserService;

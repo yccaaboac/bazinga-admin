@@ -5,7 +5,7 @@ import clay.yccaaboac.modules.blog.domain.Category;
 import clay.yccaaboac.modules.blog.service.CategoryService;
 import clay.yccaaboac.modules.blog.service.dto.CategoryDto;
 import clay.yccaaboac.modules.blog.service.dto.CategoryQueryCriteria;
-import clay.yccaaboac.modules.monitor.annotation.Log;
+import clay.yccaaboac.annotation.Log;
 import clay.yccaaboac.utils.PageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

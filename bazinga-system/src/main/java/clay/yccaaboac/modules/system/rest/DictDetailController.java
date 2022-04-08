@@ -1,7 +1,7 @@
 package clay.yccaaboac.modules.system.rest;
 
 import clay.yccaaboac.exception.BadRequestException;
-import clay.yccaaboac.modules.monitor.annotation.Log;
+import clay.yccaaboac.annotation.Log;
 import clay.yccaaboac.modules.system.domain.DictDetail;
 import clay.yccaaboac.modules.system.service.DictDetailService;
 import clay.yccaaboac.modules.system.service.dto.DictDetailQueryCriteria;
